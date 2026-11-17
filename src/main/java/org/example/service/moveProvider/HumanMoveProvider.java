@@ -4,7 +4,7 @@ import org.example.models.Move;
 
 public class HumanMoveProvider implements MoveProvider {
     @Override
-    public Move getMove() {
+    public Move getMove(int currentPosition, int diceValue) {
         return null;
     }
 }

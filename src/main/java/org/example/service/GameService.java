@@ -47,10 +47,10 @@ public class GameService {
         Move move ;
         if (currentPlayer.getName() == "BOT"){
             moveProvider = new BotMoveProver();
-            move = moveProvider.getMove();
+            move = moveProvider.getMove(currentPlayer.getCurrentPosition(), diceValue);
         }else {
             moveProvider = new HumanMoveProvider();
-            move = moveProvider.getMove();
+            move = moveProvider.getMove(currentPlayer.getCurrentPosition(), diceValue);
         }
 
         currentPlayer.updateCurrentPosition(move.getFinalDestination());
@@ -62,8 +62,7 @@ public class GameService {
         boolean isWinner = winningStrategy.checkWinner(move.getFinalDestination());
 
         if(isWinner){
-            game.updateWinner(currentPlayer);
-            game.setGameStatus(GameStatus.COMPLETED);
+            game.completeGame(currentPlayer);
             return;
         }
         if (diceValue == 6){

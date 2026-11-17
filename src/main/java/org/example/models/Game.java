@@ -45,31 +45,21 @@ public class Game {
         moveList.add(move);
     }
 
-    public void updateWinner(Player player){
-        this.winner = player;
-    }
-
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-
     public List<Move> getMoveList() {
         return moveList;
-    }
-
-    public void setMoveList(List<Move> moveList) {
-        this.moveList = moveList;
     }
 
     public Player getWinner() {
         return winner;
     }
 
-    public void setWinner(Player winner) {
-        this.winner = winner;
-    }
+    public void completeGame(Player winner) {
 
-    public void setGameStatus(GameStatus gameStatus) {
-        this.gameStatus = gameStatus;
+        if (this.gameStatus != GameStatus.IN_PROGRESS) {
+            throw new IllegalStateException("Game is not in progress");
+        }
+
+        this.winner = winner;
+        this.gameStatus = GameStatus.COMPLETED;
     }
 }
